@@ -6,6 +6,7 @@
   <link href='//fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
   <%= stylesheet_link_tag 'grape_swagger_rails/application.css' %>
   <%= javascript_include_tag 'grape_swagger_rails/application.js' %>
+  
   <script type="text/javascript">
 	$(function () {
 	  var options = $("html").data('swagger-options');
@@ -34,6 +35,7 @@
           console.log(swaggerUi);
         }
         $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+        initHMACAuth();
       },
       onFailure: function(data) {
         if('console' in window) {
@@ -43,7 +45,10 @@
       },
       docExpansion: options.doc_expansion,
       validatorUrl: options.validator_url,
-      apisSorter: "alpha"
+      apisSorter: "alpha",
+      onTryoutClick: function() {
+        console.log('test');
+      }
     });
 
     function getApiKeyAuthorization() {
@@ -79,8 +84,8 @@
       <% end %>
     }
 
-    input#input_apiKey {
-      <% if GrapeSwaggerRails.options.hide_api_key_input %>
+    input#input_accessKey {
+      <% if GrapeSwaggerRails.options.hide_access_key_input %>
       display: none;
       <% end %>
     }
@@ -94,7 +99,8 @@
 
     <form id='api_selector'>
       <div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl" type="text"/></div>
-      <div class='input'><input placeholder="api_key" id="input_apiKey" name="apiKey" type="text" value="<%= GrapeSwaggerRails.options.api_key_default_value %>"/></div>
+      <div class='input'><input placeholder="access_key" id="input_accessKey" name="apiKey" type="text" value="<%= GrapeSwaggerRails.options.access_key_default_value %>"/></div>
+      <div class='input'><input placeholder="secret_key" id="input_secretKey" name="apiKey" type="text" value="<%= GrapeSwaggerRails.options.secret_key_default_value %>"/></div>
       <div class='input'><a id="explore" class="exploreBtn" href="#">Explore</a></div>
     </form>
   </div>

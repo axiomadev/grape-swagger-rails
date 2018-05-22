@@ -13,3 +13,6 @@
 //= require ./object-assign-pollyfill
 //= require ./swagger-oauth
 //= require ./base64
+//= require ./hmac-sha256
+//= require ./enc-base64
+//= require ./hmac
