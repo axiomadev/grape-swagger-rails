@@ -24,7 +24,9 @@ var setHMACparams = function(btn) {
   var inputs = form.find('input[type=text]:not([name=signature]):not([name=tonce]), select');
   var params = {};
   $.each(inputs, function(i, el) {
-    params[$(el).attr('name')] = $(el).val();
+    if( $(el).val().length ) {
+      params[$(el).attr('name')] = $(el).val();
+    }
   });
   
   var ordered_params = {};
