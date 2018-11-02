@@ -28,6 +28,7 @@ var setHMACparams = function(btn) {
       params[$(el).attr('name')] = $(el).val();
     }
   });
+  params['tonce'] = tonce;
   
   var ordered_params = {};
   Object.keys(params).sort().forEach(function(key) {
@@ -35,7 +36,6 @@ var setHMACparams = function(btn) {
   });
   
   payload += '|' + jQuery.param(ordered_params);
-  payload += '&tonce=' + tonce;
   var signature = CryptoJS.HmacSHA256(payload, secret_key).toString(CryptoJS.enc.Hex)
   form.find('input[name="signature"]').val(signature);
 }
